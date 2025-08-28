@@ -1,30 +1,30 @@
 body {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #20264f; /* Background Color */
-    color: #aeb5ff; /* Text Color */
+    font-family: 'Montserrat', Montserrat;
+    background-color: #ffffff; /* Background Color */
+    color: #20264f; /* Text Color */
     text-align: center;
     margin: 0;
     padding: 0;
 }
 
 #header {
-    background-color: #20264f;
+    background-color: #ffffff;
     padding: 20px;
     margin-bottom: 30px;
 }
 
 .logo {
-    width: 120px;
+    width: 150px;
     height: auto;
 }
 
 h1 {
     font-size: 26px;
-    color: #aeb5ff;
+    color: #20264f;
 }
 
 button {
-    background-color: #52bcfa;
+    background-color: #AEB5FF;
     border: 2px solid #5032b9;
     border-radius: 12px;  /* Makes the corners rounded */
     padding: 12px 25px;
