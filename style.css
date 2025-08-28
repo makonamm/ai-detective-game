@@ -26,6 +26,7 @@ h1 {
 button {
     background-color: #52bcfa;
     border: 2px solid #5032b9;
+    border-radius: 12px;  /* Makes the corners rounded */
     padding: 12px 25px;
     margin: 15px;
     font-size: 18px;
@@ -49,10 +50,12 @@ button:active {
 #question-container {
     font-size: 22px;
     margin-bottom: 20px;
+    border-radius: 12px;  /* Round corners for answer options */
 }
 
 #next-button {
     margin-top: 20px;
+    border-radius: 12px;  /* Round corners for the Next and Consent buttons */
 }
 
 #feedback-container {
