@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Detective Academy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="header">
+        <img src="logo.png" alt="AI Detective Academy Logo" class="logo">
+        <h1>The truth is out there. It’s up to you to find it. Start your investigation, Detective!</h1>
+    </div>
+
+    <div class="age-buttons">
+        <button id="start-kid" onclick="startGame('kid')">Start (Below 10 years old)</button>
+        <button id="start-teen" onclick="startGame('teen')">Start (10–18 years old)</button>
+        <button id="start-young-adult" onclick="startGame('young-adult')">Start (18–24 years old)</button>
+    </div>
+
+    <div id="game-container" style="display:none;">
+        <div id="question-container">
+            <!-- Question content will go here -->
+        </div>
+        <div id="feedback-container">
+            <!-- Feedback after answer will be shown here -->
+        </div>
+        <div id="next-button" style="display:none;">
+            <button onclick="nextQuestion()">Next Question</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
