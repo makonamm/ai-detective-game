@@ -86,8 +86,8 @@ function generateBadge() {
     badgeImage.src = 'badge.png';  // Path to the badge image
 
     // Set the badge size to be smaller (adjust width and height as needed)
-    badgeImage.style.width = '100px';  // Set the width of the badge
-    badgeImage.style.height = 'auto';  // Maintain aspect ratio
+    badgeImage.style.width = '70px';  // Set the width of the badge
+    badgeImage.style.height = '70px';  // Maintain aspect ratio
 
     // Display the badge
     document.getElementById('badge-section').style.display = 'block';
