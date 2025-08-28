@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f6a051;
+    color: #1d86ce;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    background-color: #7c5a89;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+}
+
+h1 {
+    font-size: 24px;
+    color: #fff;
+}
+
+.age-buttons button {
+    background-color: #52bcfa;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.age-buttons button:hover {
+    background-color: #5032b9;
+    color: #fff;
+}
+
+#game-container {
+    margin-top: 30px;
+}
+
+#question-container {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+#feedback-container {
+    font-size: 18px;
+    color: #efc876;
+}
+
+button {
+    font-size: 16px;
+    padding: 10px;
+}
+
+button:hover {
+    background-color: #5032b9;
+    color: white;
+}
