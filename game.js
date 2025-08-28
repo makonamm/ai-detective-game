@@ -72,6 +72,11 @@ function nextQuestion() {
 
 function finishGame() {
     document.getElementById('question-container').innerHTML = "<p>Congratulations, Detective! You’ve completed your investigation. The truth is now clear.</p>";
+    document.getElementById('question-container').innerHTML += '<button onclick="showProceedButton()">Click here to proceed further for collection of your AI Detective Badge</button>';
+}
+
+function showProceedButton() {
+    document.getElementById('question-container').innerHTML = "<p>Proceeding to data consent...</p>";
     showConsentPopup();
 }
 
@@ -86,5 +91,19 @@ function showConsentPopup() {
 
 function consentToData() {
     alert("Thank you for consenting! Here’s your AI Detective Badge.");
-    // Generate and show badge here
+    
+    // Display the badge image
+    let badgeImage = document.createElement('img');
+    badgeImage.src = 'badge.png';  // Path to the badge image
+    document.body.appendChild(badgeImage);
+
+    // Create a download button for the badge
+    let downloadButton = document.createElement('a');
+    downloadButton.href = 'badge.png';
+    downloadButton.download = 'AI_Detective_Badge.png';
+    downloadButton.innerHTML = 'Download Your Badge';
+    document.body.appendChild(downloadButton);
+
+    // Proceed to the final message
+    alert("You’ve received your AI Detective Badge! Thank you for completing the mission.");
 }
