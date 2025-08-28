@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Detective Academy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Font -->
-    <link rel="stylesheet" href="style.css"> <!-- CSS File -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"> <!-- Font -->
+    <link rel="stylesheet" href="style.css"> <!-- Linking to CSS -->
 </head>
 <body>
     <div id="header">
         <img src="logo.png" alt="AI Detective Academy Logo" class="logo">
-        <h1>The truth is out there. It’s up to you to find it. Start your investigation, Detective!</h1>
+        <h1>The truth is out there. It's up to you to find it. Start your investigation, Detective!</h1>
     </div>
 
-    <div class="age-buttons">
-        <button id="start-kid" onclick="startGame('kid')">Start (Below 10 years old)</button>
-        <button id="start-teen" onclick="startGame('teen')">Start (10–18 years old)</button>
-        <button id="start-young-adult" onclick="startGame('young-adult')">Start (18–24 years old)</button>
+    <div id="intro-page">
+        <button onclick="startGame('kid')">Start (Below 10 years old)</button>
+        <button onclick="startGame('teen')">Start (10–18 years old)</button>
+        <button onclick="startGame('young-adult')">Start (18–24 years old)</button>
     </div>
 
     <div id="game-container" style="display:none;">
@@ -27,6 +27,23 @@
         </div>
     </div>
 
-    <script src="game.js"></script>
+    <div id="end-game" style="display:none;">
+        <p>Congratulations, Detective! You’ve completed your investigation. The truth is now clear.</p>
+        <button onclick="proceedToConsent()">Click here to proceed and collect your AI Detective Badge</button>
+    </div>
+
+    <div id="consent-page" style="display:none;">
+        <p>To improve our educational resources, we collect anonymous game data. By consenting, your data helps us create and update better syllabi for educators.</p>
+        <button onclick="generateBadge()">I consent</button>
+    </div>
+
+    <div id="badge-section" style="display:none;">
+        <img id="badge" src="" alt="AI Detective Badge">
+        <a id="badge-download" href="" download="AI_Detective_Badge.png">
+            <button>Download Your Badge</button>
+        </a>
+    </div>
+
+    <script src="game.js"></script> <!-- Linking to JS -->
 </body>
 </html>
