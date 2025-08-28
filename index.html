@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Detective Academy</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Font -->
+    <link rel="stylesheet" href="style.css"> <!-- CSS File -->
 </head>
 <body>
     <div id="header">
@@ -19,12 +20,8 @@
     </div>
 
     <div id="game-container" style="display:none;">
-        <div id="question-container">
-            <!-- Question content will go here -->
-        </div>
-        <div id="feedback-container">
-            <!-- Feedback after answer will be shown here -->
-        </div>
+        <div id="question-container"></div>
+        <div id="feedback-container"></div>
         <div id="next-button" style="display:none;">
             <button onclick="nextQuestion()">Next Question</button>
         </div>
