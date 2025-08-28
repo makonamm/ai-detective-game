@@ -81,12 +81,19 @@ function proceedToConsent() {
 }
 
 function generateBadge() {
-    // Show the badge and download button
+    // Show the badge image
     let badgeImage = document.createElement('img');
-    badgeImage.src = 'badge.png';  // Use the path to your badge image here
+    badgeImage.src = 'badge.png';  // Path to the badge image
+
+    // Set the badge size to be smaller (adjust width and height as needed)
+    badgeImage.style.width = '100px';  // Set the width of the badge
+    badgeImage.style.height = 'auto';  // Maintain aspect ratio
+
+    // Display the badge
     document.getElementById('badge-section').style.display = 'block';
     document.getElementById('badge-section').appendChild(badgeImage);
 
+    // Create a download button for the badge
     let downloadButton = document.getElementById('badge-download');
     downloadButton.href = 'badge.png';
     downloadButton.download = 'AI_Detective_Badge.png';
