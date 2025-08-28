@@ -63,6 +63,18 @@ button:active {
     color: #efc876;
 }
 
+#tip-container {
+    font-size: 16px;
+    color: #f6a051;  /* Tip Text Color */
+    font-style: italic;  /* Make it slightly different */
+    margin-top: 20px;
+    background-color: #2d3c6e;  /* Background for the tip */
+    padding: 10px;
+    border-radius: 8px;
+    color: #aeb5ff;  /* Lighter color for better contrast */
+    text-align: center;
+}
+
 #end-game p {
     font-size: 22px;
     font-weight: bold;
