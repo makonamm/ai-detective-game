@@ -8,7 +8,7 @@ body {
 }
 
 #header {
-    background-color: #7c5a89;
+    background-color: #20264f; /* Keep the header in the same color */
     padding: 20px;
     margin-bottom: 20px;
 }
@@ -40,7 +40,7 @@ h1 {
 }
 
 .age-buttons button:active {
-    transform: scale(0.95); /* Makes the button "clickable" by shrinking it when clicked */
+    transform: scale(0.95); /* Button shrink when clicked */
 }
 
 #game-container {
@@ -63,7 +63,7 @@ button:hover {
 }
 
 #question-container button {
-    margin: 10px; /* Space between answer options */
+    margin: 15px 0; /* Added space between answer options */
     padding: 15px;
     border: none;
     background-color: #503e62;
