@@ -291,6 +291,43 @@ let questionsForYoungAdults = [
     }
 ];
 
+const questionHeaders = [
+    // Teens (10 questions)
+    "Every clue counts. Every answer is a lead. Let’s uncover the truth behind AI.",
+    "A great detective never takes anything at face value. Question what you see, trust what you prove.",
+    "The best detectives ask: ‘Is it true?’ and ‘How can I prove it?’ Are you ready to start the case?",
+    "Logic is your best tool. Don’t follow the crowd — follow the evidence.",
+    "To catch a mistake, you must first know how to spot the truth. Are you ready to investigate?",
+    "Observe carefully. Every detail might hold a hidden clue.",
+    "Curiosity is the first step to discovery. Question everything.",
+    "Evidence doesn’t lie, but misinterpretation does. Check twice.",
+    "A sharp mind sees patterns where others see chaos.",
+    "Remember, in investigation, patience is as important as knowledge.",
+
+    // Young Adults 18-24 (10 questions)
+    "In the world of AI, assumptions are often wrong. Investigate thoroughly.",
+    "A true detective tests the facts, not the rumors.",
+    "Every anomaly is an opportunity to learn something new.",
+    "Even the most believable statements can be false. Stay alert.",
+    "Question the obvious; truth often hides in plain sight.",
+    "Patterns tell stories. Analyze before you conclude.",
+    "Trust your reasoning; verify the sources.",
+    "Small inconsistencies can reveal a larger truth.",
+    "Critical thinking turns data into insight.",
+    "Every correct deduction is a step closer to the ultimate answer.",
+
+    // Adults 25+ (10 questions)
+    "Experience teaches that the first answer is rarely the correct one.",
+    "Observation and logic together uncover hidden truths.",
+    "Bias clouds judgment. Approach each clue neutrally.",
+    "Verification is the backbone of a sound conclusion.",
+    "Details matter. The smallest fact can change the outcome.",
+    "Question assumptions, even those you consider obvious.",
+    "A detective’s success depends on patience and careful analysis.",
+    "The truth is often layered. Peel back each layer systematically.",
+    "Evidence may be subtle, but it is never meaningless.",
+    "Every investigation is a journey. Keep your eyes open."
+];
 
 let currentQuestionIndex = 0;
 let questions = questionsForKids; // Default to kids' questions
@@ -314,8 +351,22 @@ function startGame(ageGroup) {
 function showQuestion() {
     let question = questions[currentQuestionIndex];
     let questionContainer = document.getElementById('question-container');
-    questionContainer.innerHTML = `<p>${question.question}</p>`;
-    
+    let feedbackContainer = document.getElementById('feedback-container');
+    let tipContainer = document.getElementById('tip-container');
+    let questionHeaderContainer = document.getElementById('question-header');
+
+    // Clear previous feedback
+    feedbackContainer.innerHTML = "";
+    tipContainer.innerHTML = "";
+
+    // Show per-question header
+    if (questionHeaders[currentQuestionIndex]) {
+        questionHeaderContainer.innerHTML = `<p style="font-weight: normal; font-size: 16px; color: #202650; margin-bottom:10px;">${questionHeaders[currentQuestionIndex]}</p>`;
+    }
+
+    // Show question text
+    questionContainer.innerHTML = `<p style="font-weight:bold; font-size: 20px; color:#202650;">${question.question}</p>`;
+
     // Shuffle the answer options
     let shuffledOptions = shuffleArray(question.options);
 
@@ -323,8 +374,13 @@ function showQuestion() {
     shuffledOptions.forEach((option, index) => {
         optionsHtml += `<button onclick="checkAnswer(${index})">${option.text}</button>`;
     });
-    
+
     questionContainer.innerHTML += optionsHtml;
+
+    // Display the tip
+    if (question.tip) {
+        tipContainer.innerHTML = `<p>${question.tip}</p>`;
+    }
 }
 
 function checkAnswer(selectedIndex) {
