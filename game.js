@@ -348,91 +348,123 @@ function startGame(ageGroup) {
     showQuestion();
 }
 
+let currentQuestionIndex = 0; // Tracks which question player is on
+
 function showQuestion() {
     let question = questions[currentQuestionIndex];
     let questionContainer = document.getElementById('question-container');
-    let feedbackContainer = document.getElementById('feedback-container');
     let tipContainer = document.getElementById('tip-container');
-    let questionHeaderContainer = document.getElementById('question-header');
+    let feedbackContainer = document.getElementById('feedback-container');
+    let nextBtn = document.getElementById('next-button');
 
-    // Clear previous feedback
-    feedbackContainer.innerHTML = "";
+    // Clear previous content
+    questionContainer.innerHTML = "";
     tipContainer.innerHTML = "";
+    feedbackContainer.innerHTML = "";
+    nextBtn.style.display = "none";
 
-    // Show per-question header
-    if (questionHeaders[currentQuestionIndex]) {
-        questionHeaderContainer.innerHTML = `<p style="font-weight: normal; font-size: 16px; color: #202650; margin-bottom:10px;">${questionHeaders[currentQuestionIndex]}</p>`;
-    }
-
-    // Show question text
-    questionContainer.innerHTML = `<p style="font-weight:bold; font-size: 20px; color:#202650;">${question.question}</p>`;
+    // Show the question text
+    questionContainer.innerHTML = `<p>${question.question}</p>`;
 
     // Shuffle the answer options
     let shuffledOptions = shuffleArray(question.options);
 
-    let optionsHtml = '';
+    // Show each answer as a button
     shuffledOptions.forEach((option, index) => {
-        optionsHtml += `<button onclick="checkAnswer(${index})">${option.text}</button>`;
+        let btn = document.createElement("button");
+        btn.innerText = option.text;
+        btn.onclick = function() {
+            checkAnswer(option, btn);
+        };
+        questionContainer.appendChild(btn);
     });
 
-    questionContainer.innerHTML += optionsHtml;
-
-    // Display the tip
-    if (question.tip) {
-        tipContainer.innerHTML = `<p>${question.tip}</p>`;
-    }
+    // Show the tip in different style
+    tipContainer.innerHTML = `<p>${question.tip}</p>`;
 }
 
-function checkAnswer(selectedIndex) {
-    let question = questions[currentQuestionIndex];
+function checkAnswer(option, btnClicked) {
     let feedbackContainer = document.getElementById('feedback-container');
-    let nextButton = document.getElementById('next-button');
+    let nextBtn = document.getElementById('next-button');
 
-    // Clear previous feedback
-    feedbackContainer.innerHTML = "";
+    if (option.correct) {
+        feedbackContainer.innerHTML = "Correct! 🎉";
 
-    let option = question.options[selectedIndex];
+        // Disable all answer buttons after correct
+        let buttons = document.querySelectorAll('#question-container button');
+        buttons.forEach(btn => btn.disabled = true);
 
-    if(option.isCorrect){
-        feedbackContainer.innerHTML = `<p style="color:#427642;font-weight:bold;">Correct!</p>`;
-        nextButton.disabled = false; // Enable Next button
+        // Show the Next button
+        nextBtn.style.display = "inline-block";
+        nextBtn.onclick = function() {
+            nextQuestion();
+        };
     } else {
-        feedbackContainer.innerHTML = `<p style="color:#ff4d4d;font-weight:bold;">Incorrect! Try again.</p>`;
-        nextButton.disabled = true; // Keep Next disabled
+        feedbackContainer.innerHTML = "Incorrect. Try again!";
     }
 }
 
 function nextQuestion() {
     currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
-        showQuestion();
-        document.getElementById('next-button').style.display = 'none';
+
+    // If last question reached, show end message
+    if (currentQuestionIndex >= questions.length) {
+        showEndGame();
+        return;
+    }
+
+    showQuestion(); // Show next question
+}
+
+// Show end-game message after last question
+function showEndGame() {
+    let gameContainer = document.getElementById('game-container');
+    gameContainer.innerHTML = `
+        <div id="end-game">
+            <p>Congratulations, Detective! You’ve completed your investigation. The truth is now clear.</p>
+            <p><button onclick="showConsentPage()">Proceed to Consent Question</button></p>
+        </div>
+    `;
+}
+
+// Show the consent question page
+function showConsentPage() {
+    let gameContainer = document.getElementById('game-container');
+    gameContainer.innerHTML = `
+        <div id="consent-page">
+            <p>Please answer the consent question before collecting your badge:</p>
+            <p>Do you agree to participate in this investigation game?</p>
+            <button onclick="consentAnswer(true)">Yes</button>
+            <button onclick="consentAnswer(false)">No</button>
+        </div>
+    `;
+}
+
+// Handle consent answer and show badge
+function consentAnswer(answer) {
+    let gameContainer = document.getElementById('game-container');
+    if(answer) {
+        gameContainer.innerHTML = `
+            <div id="badge-section">
+                <img src="badge.png" id="badge" alt="AI Detective Badge">
+                <p>Well done! You are now a certified AI Detective!</p>
+            </div>
+        `;
     } else {
-        finishGame();
+        gameContainer.innerHTML = `
+            <div id="badge-section">
+                <p>Okay, you chose not to participate. You cannot receive the badge.</p>
+            </div>
+        `;
     }
 }
 
-function finishGame() {
-    document.getElementById('game-container').style.display = 'none';
-    document.getElementById('end-game').style.display = 'block';
-}
-
-function proceedToConsent() {
-    document.getElementById('end-game').style.display = 'none';
-    document.getElementById('consent-page').style.display = 'block';
-}
-
-function generateBadge() {
-    let badgeImage = document.createElement('img');
-    badgeImage.src = 'badge.png';  // Path to the badge image
-    badgeImage.style.width = '100px';  // Set the width of the badge
-    badgeImage.style.height = 'auto';  // Maintain aspect ratio
-
-    document.getElementById('badge-section').style.display = 'block';
-    document.getElementById('badge-section').appendChild(badgeImage);
-
-    let downloadButton = document.getElementById('badge-download');
-    downloadButton.href = 'badge.png';
-    downloadButton.download = 'AI_Detective_Badge.png';
-    downloadButton.innerHTML = 'Download Your Badge';
+// Utility function to shuffle answers
+function shuffleArray(array) {
+    let arr = array.slice();
+    for (let i = arr.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
 }
