@@ -4,48 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Detective Academy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"> <!-- Font -->
-    <link rel="stylesheet" href="style.css"> <!-- Linking to CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="header">
         <img src="logo.png" alt="AI Detective Academy Logo" class="logo">
-        <h1>The truth is out there. It's up to you to find it. Start your investigation, Detective!</h1>
+        <h1 id="header-text">The truth is out there. It's up to you to find it. Start your investigation, Detective!</h1>
     </div>
 
+    <!-- Intro / Age selection -->
     <div id="intro-page">
         <button onclick="startGame('kid')">Start (Below 10 years old)</button>
         <button onclick="startGame('teen')">Start (10–18 years old)</button>
         <button onclick="startGame('young-adult')">Start (18–24 years old)</button>
     </div>
 
+    <!-- Game container -->
     <div id="game-container" style="display:none;">
         <div id="question-header" style="font-size: 16px; font-weight: 500; color: #202650; margin-bottom: 10px;"></div>
         <div id="question-container"></div>
-        <div id="tip-container"></div> <!-- This will display the tip below the answer options -->
+        <div id="tip-container"></div>
         <div id="feedback-container"></div>
         <div id="next-button" style="display:none;">
             <button onclick="nextQuestion()">Next Question</button>
         </div>
     </div>
 
+    <!-- End game -->
     <div id="end-game" style="display:none;">
         <p>Congratulations, Detective! You’ve completed your investigation. The truth is now clear.</p>
         <button onclick="proceedToConsent()">Click here to proceed and collect your AI Detective Badge</button>
     </div>
 
+    <!-- Consent page -->
     <div id="consent-page" style="display:none;">
         <p>To improve our educational resources, we collect anonymous game data. By consenting, your data helps us create and update better syllabi for educators.</p>
         <button onclick="generateBadge()">I consent</button>
     </div>
 
+    <!-- Badge -->
     <div id="badge-section" style="display:none;">
-        <img id="badge" src="" alt="AI Detective Badge">
-        <a id="badge-download" href="" download="AI_Detective_Badge.png">
+        <img id="badge" src="badge.png" alt="AI Detective Badge" style="width:150px; height:auto;">
+        <a id="badge-download" href="badge.png" download="AI_Detective_Badge.png">
             <button>Download Your Badge</button>
         </a>
     </div>
 
-    <script src="game.js"></script> <!-- Linking to JS -->
+    <script src="game.js"></script>
 </body>
 </html>
+
