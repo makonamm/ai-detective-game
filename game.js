@@ -325,21 +325,31 @@ function showQuestion() {
     });
     
     questionContainer.innerHTML += optionsHtml;
-
-    // Display the tip in the tip-container with unique styling
-    let tipContainer = document.getElementById('tip-container');
-    tipContainer.innerHTML = `<p>${question.tip}</p>`;
 }
 
-function checkAnswer(index) {
+function checkAnswer(selectedIndex) {
     let question = questions[currentQuestionIndex];
     let feedbackContainer = document.getElementById('feedback-container');
-    if (question.options[index].correct) {
-        feedbackContainer.innerHTML = "<p>Correct!</p>";
-        document.getElementById('next-button').style.display = 'block';
+    let tipContainer = document.getElementById('tip-container');
+
+    if (question.options[selectedIndex].isCorrect) {
+        feedbackContainer.innerHTML = 'Correct!';
     } else {
-        feedbackContainer.innerHTML = "<p>Oops, that's incorrect. Try again!</p>";
+        feedbackContainer.innerHTML = 'Wrong!';
     }
+
+    // Show tip after answering
+    tipContainer.innerHTML = `<p>${question.tip}</p>`;
+
+    // Move to next question after delay
+    setTimeout(() => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            showQuestion();
+        } else {
+            endGame();
+        }
+    }, 1000);
 }
 
 function nextQuestion() {
