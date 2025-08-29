@@ -74,12 +74,13 @@ button:active {
 /* Tip Text Styling */
 #tip-container {
     font-size: 16px;
-    color: #aeb5ff;  /* Tip Text Color */
+    color: #427642;  /* Text Color */
     font-style: italic;  /* Make it slightly different */
     margin-top: 20px;
-    background-color: #2d3c6e;  /* Background for the tip */
+    background-color: #dbf3db;  /* Green Light Background */
     padding: 10px;
     border-radius: 8px;
+    border: 2px solid #427642; /* Green border */
     text-align: center;
     font-weight: normal; /* Normal weight for tips */
 }
