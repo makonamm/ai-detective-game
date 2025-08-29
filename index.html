@@ -6,8 +6,20 @@
     <title>AI Detective Academy</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: 'Montserrat', sans-serif; background:#f9f9f9; margin:0; padding:0; text-align:center;}
+        #header { background:#202650; color:#fff; padding:20px;}
+        .logo { width:80px; }
+        #intro-page button, #game-container button, #consent-page button, #badge-section button { 
+            margin:10px; padding:10px 20px; font-size:16px; cursor:pointer; 
+        }
+        #question-container button { display:block; margin:8px auto; width:80%; }
+        #tip-container { font-style:italic; color:#555; margin-top:10px; }
+        #feedback-container { font-weight:bold; margin-top:10px; }
+    </style>
 </head>
 <body>
+    <!-- Header -->
     <div id="header">
         <img src="logo.png" alt="AI Detective Academy Logo" class="logo">
         <h1 id="header-text">The truth is out there. It's up to you to find it. Start your investigation, Detective!</h1>
@@ -22,7 +34,7 @@
 
     <!-- Game container -->
     <div id="game-container" style="display:none;">
-        <div id="question-header" style="font-size: 16px; font-weight: 500; color: #202650; margin-bottom: 10px;"></div>
+        <div id="question-header"></div>
         <div id="question-container"></div>
         <div id="tip-container"></div>
         <div id="feedback-container"></div>
@@ -31,27 +43,35 @@
         </div>
     </div>
 
-    <!-- End game -->
-    <div id="end-game" style="display:none;">
-        <p>Congratulations, Detective! You’ve completed your investigation. The truth is now clear.</p>
-        <button onclick="proceedToConsent()">Click here to proceed and collect your AI Detective Badge</button>
-    </div>
-
     <!-- Consent page -->
     <div id="consent-page" style="display:none;">
-        <p>To improve our educational resources, we collect anonymous game data. By consenting, your data helps us create and update better syllabi for educators.</p>
-        <button onclick="generateBadge()">I consent</button>
+        <p>Please answer the consent question before collecting your badge:</p>
+        <p>Do you agree to participate in this investigation game?</p>
+        <button onclick="consentAnswer(true)">Yes</button>
+        <button onclick="consentAnswer(false)">No</button>
     </div>
 
-    <!-- Badge -->
+    <!-- Badge section -->
     <div id="badge-section" style="display:none;">
-        <img id="badge" src="badge.png" alt="AI Detective Badge" style="width:150px; height:auto;">
+        <img src="badge.png" id="badge" alt="AI Detective Badge" style="width:150px; height:auto;">
         <a id="badge-download" href="badge.png" download="AI_Detective_Badge.png">
             <button>Download Your Badge</button>
         </a>
+        <div style="margin-top:20px;">
+            <button onclick="restartGame()">Restart Game</button>
+        </div>
     </div>
 
     <script src="game.js"></script>
+    <script>
+        // Optional: Restart the game after badge
+        function restartGame() {
+            currentQuestionIndex = 0;
+            document.getElementById('intro-page').style.display = 'block';
+            document.getElementById('game-container').style.display = 'none';
+            document.getElementById('consent-page').style.display = 'none';
+            document.getElementById('badge-section').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
-
