@@ -386,26 +386,20 @@ function showQuestion() {
 function checkAnswer(selectedIndex) {
     let question = questions[currentQuestionIndex];
     let feedbackContainer = document.getElementById('feedback-container');
-    let tipContainer = document.getElementById('tip-container');
+    let nextButton = document.getElementById('next-button');
 
-    if (question.options[selectedIndex].isCorrect) {
-        feedbackContainer.innerHTML = 'Correct!';
+    // Clear previous feedback
+    feedbackContainer.innerHTML = "";
+
+    let option = question.options[selectedIndex];
+
+    if(option.isCorrect){
+        feedbackContainer.innerHTML = `<p style="color:#427642;font-weight:bold;">Correct!</p>`;
+        nextButton.disabled = false; // Enable Next button
     } else {
-        feedbackContainer.innerHTML = 'Wrong!';
+        feedbackContainer.innerHTML = `<p style="color:#ff4d4d;font-weight:bold;">Incorrect! Try again.</p>`;
+        nextButton.disabled = true; // Keep Next disabled
     }
-
-    // Show tip after answering
-    tipContainer.innerHTML = `<p>${question.tip}</p>`;
-
-    // Move to next question after delay
-    setTimeout(() => {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-            showQuestion();
-        } else {
-            endGame();
-        }
-    }, 1000);
 }
 
 function nextQuestion() {
