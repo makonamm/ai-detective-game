@@ -1,15 +1,11 @@
-// Shuffle function to randomize the order of the answers
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];  // Swap elements
-    }
-    return array;
-}
+// =====================
+// AI Detective Quiz JS
+// =====================
 
-// Questions for Kids (Under 10)
-let questionsForKids = [
-    {
+// Question sets
+const questionsForKids = [
+    // Example kids questions
+   {
         question: "You see a post that says, 'Eating too many carrots will turn you orange!' Should you believe it?",
         options: [
             { text: "Yes, because the post has a picture of a carrot.", correct: false },
@@ -101,8 +97,7 @@ let questionsForKids = [
     }
 ];
 
-// Questions for Teens (10–18 years old)
-let questionsForTeens = [
+const questionsForTeens = [
     // Same pattern, but more complex questions based on social media and critical thinking
         {
         question: "A viral tweet says, 'If you don’t share this, something bad will happen to you!' Should you share it?",
@@ -196,8 +191,8 @@ let questionsForTeens = [
         }
     ];
 
-// Questions for Young Adults (18-24 years old)
-let questionsForYoungAdults = [
+
+const questionsForYoungAdults = [
     // Complex questions based on AI, fake news, and media literacy
     {
         question: "You see a trending article claiming that 'AI will soon be able to think like humans.' Is this true?",
@@ -291,132 +286,144 @@ let questionsForYoungAdults = [
     }
 ];
 
-const questionHeaders = [
-    // Teens (10 questions)
-    "Every clue counts. Every answer is a lead. Let’s uncover the truth behind AI.",
-    "A great detective never takes anything at face value. Question what you see, trust what you prove.",
-    "The best detectives ask: ‘Is it true?’ and ‘How can I prove it?’ Are you ready to start the case?",
-    "Logic is your best tool. Don’t follow the crowd — follow the evidence.",
-    "To catch a mistake, you must first know how to spot the truth. Are you ready to investigate?",
-    "Observe carefully. Every detail might hold a hidden clue.",
-    "Curiosity is the first step to discovery. Question everything.",
-    "Evidence doesn’t lie, but misinterpretation does. Check twice.",
-    "A sharp mind sees patterns where others see chaos.",
-    "Remember, in investigation, patience is as important as knowledge.",
+// Question headers per age group
+const questionHeaders = {
+    kid: [
+        "Every clue counts. Every answer is a lead. Let’s uncover the truth behind AI.",
+        "A great detective never takes anything at face value. Question what you see, trust what you prove.",
+        "The best detectives ask: ‘Is it true?’ and ‘How can I prove it?’ Are you ready to start the case?",
+        "Logic is your best tool. Don’t follow the crowd — follow the evidence.",
+        "To catch a mistake, you must first know how to spot the truth. Are you ready to investigate?",
+        "Observe carefully. Every detail might hold a hidden clue.",
+        "Curiosity is the first step to discovery. Question everything.",
+        "Evidence doesn’t lie, but misinterpretation does. Check twice.",
+        "A sharp mind sees patterns where others see chaos.",
+        "Remember, in investigation, patience is as important as knowledge.",
+    ],
+    teen: [
+        "In the world of AI, assumptions are often wrong. Investigate thoroughly.",
+        "A true detective tests the facts, not the rumors.",
+        "Every anomaly is an opportunity to learn something new.",
+        "Even the most believable statements can be false. Stay alert.",
+        "Question the obvious; truth often hides in plain sight.",
+        "Patterns tell stories. Analyze before you conclude.",
+        "Trust your reasoning; verify the sources.",
+        "Small inconsistencies can reveal a larger truth.",
+        "Critical thinking turns data into insight.",
+        "Every correct deduction is a step closer to the ultimate answer.",
+    ],
+    "young-adult": [
+        "Experience teaches that the first answer is rarely the correct one.",
+        "Observation and logic together uncover hidden truths.",
+        "Bias clouds judgment. Approach each clue neutrally.",
+        "Verification is the backbone of a sound conclusion.",
+        "Details matter. The smallest fact can change the outcome.",
+        "Question assumptions, even those you consider obvious.",
+        "A detective’s success depends on patience and careful analysis.",
+        "The truth is often layered. Peel back each layer systematically.",
+        "Evidence may be subtle, but it is never meaningless.",
+        "Every investigation is a journey. Keep your eyes open."
+    ]
+};
 
-    // Young Adults 18-24 (10 questions)
-    "In the world of AI, assumptions are often wrong. Investigate thoroughly.",
-    "A true detective tests the facts, not the rumors.",
-    "Every anomaly is an opportunity to learn something new.",
-    "Even the most believable statements can be false. Stay alert.",
-    "Question the obvious; truth often hides in plain sight.",
-    "Patterns tell stories. Analyze before you conclude.",
-    "Trust your reasoning; verify the sources.",
-    "Small inconsistencies can reveal a larger truth.",
-    "Critical thinking turns data into insight.",
-    "Every correct deduction is a step closer to the ultimate answer.",
-
-    // Adults 25+ (10 questions)
-    "Experience teaches that the first answer is rarely the correct one.",
-    "Observation and logic together uncover hidden truths.",
-    "Bias clouds judgment. Approach each clue neutrally.",
-    "Verification is the backbone of a sound conclusion.",
-    "Details matter. The smallest fact can change the outcome.",
-    "Question assumptions, even those you consider obvious.",
-    "A detective’s success depends on patience and careful analysis.",
-    "The truth is often layered. Peel back each layer systematically.",
-    "Evidence may be subtle, but it is never meaningless.",
-    "Every investigation is a journey. Keep your eyes open."
-];
-
+// Global state
 let currentQuestionIndex = 0;
-let questions = questionsForKids; // Default to kids' questions
+let questions = [];
+let ageGroup = 'kid';
+let firstWrongAttempt = true;
 
-function startGame(ageGroup) {
+// Start the game
+function startGame(selectedAgeGroup) {
+    ageGroup = selectedAgeGroup;
+    currentQuestionIndex = 0;
+    firstWrongAttempt = true;
     document.querySelector('#intro-page').style.display = 'none';
     document.getElementById('game-container').style.display = 'block';
 
-    // Set the correct question set based on the age group
-    if (ageGroup === 'kid') {
-        questions = questionsForKids;
-    } else if (ageGroup === 'teen') {
-        questions = questionsForTeens;
-    } else if (ageGroup === 'young-adult') {
-        questions = questionsForYoungAdults;
-    }
+    if (ageGroup === 'kid') questions = questionsForKids;
+    else if (ageGroup === 'teen') questions = questionsForTeens;
+    else if (ageGroup === 'young-adult') questions = questionsForYoungAdults;
 
     showQuestion();
 }
 
-let currentQuestionIndex = 0; // Tracks which question player is on
-
+// Show a question
 function showQuestion() {
     let question = questions[currentQuestionIndex];
     let questionContainer = document.getElementById('question-container');
     let tipContainer = document.getElementById('tip-container');
     let feedbackContainer = document.getElementById('feedback-container');
     let nextBtn = document.getElementById('next-button');
+    let headerContainer = document.getElementById('question-header');
 
-    // Clear previous content
+    // Reset
     questionContainer.innerHTML = "";
     tipContainer.innerHTML = "";
     feedbackContainer.innerHTML = "";
     nextBtn.style.display = "none";
+    firstWrongAttempt = true;
 
-    // Show the question text
+    // Show header and question
+    headerContainer.innerText = questionHeaders[ageGroup][currentQuestionIndex % questionHeaders[ageGroup].length];
     questionContainer.innerHTML = `<p>${question.question}</p>`;
 
-    // Shuffle the answer options
+    // Shuffle options
     let shuffledOptions = shuffleArray(question.options);
 
-    // Show each answer as a button
-    shuffledOptions.forEach((option, index) => {
+    shuffledOptions.forEach(option => {
         let btn = document.createElement("button");
         btn.innerText = option.text;
-        btn.onclick = function() {
+        btn.onclick = function () {
             checkAnswer(option, btn);
         };
         questionContainer.appendChild(btn);
     });
-
-    // Show the tip in different style
-    tipContainer.innerHTML = `<p>${question.tip}</p>`;
 }
 
+// Check answer
 function checkAnswer(option, btnClicked) {
     let feedbackContainer = document.getElementById('feedback-container');
     let nextBtn = document.getElementById('next-button');
+    let buttons = document.querySelectorAll('#question-container button');
 
     if (option.correct) {
+        btnClicked.style.backgroundColor = 'green';
         feedbackContainer.innerHTML = "Correct! 🎉";
 
-        // Disable all answer buttons after correct
-        let buttons = document.querySelectorAll('#question-container button');
+        // Disable buttons
         buttons.forEach(btn => btn.disabled = true);
 
-        // Show the Next button
+        // Show tip always for learning
+        feedbackContainer.innerHTML += `<br><small>Tip: ${questions[currentQuestionIndex].tip}</small>`;
+
+        // Show next button
         nextBtn.style.display = "inline-block";
-        nextBtn.onclick = function() {
-            nextQuestion();
-        };
+        nextBtn.onclick = nextQuestion;
+
     } else {
+        btnClicked.style.backgroundColor = 'red';
         feedbackContainer.innerHTML = "Incorrect. Try again!";
+
+        if (firstWrongAttempt) {
+            // Show tip only after first wrong attempt
+            let tipContainer = document.getElementById('tip-container');
+            tipContainer.innerHTML = `<small>Tip: ${questions[currentQuestionIndex].tip}</small>`;
+            firstWrongAttempt = false;
+        }
     }
 }
 
+// Next question
 function nextQuestion() {
     currentQuestionIndex++;
-
-    // If last question reached, show end message
     if (currentQuestionIndex >= questions.length) {
         showEndGame();
         return;
     }
-
-    showQuestion(); // Show next question
+    showQuestion();
 }
 
-// Show end-game message after last question
+// End-game
 function showEndGame() {
     let gameContainer = document.getElementById('game-container');
     gameContainer.innerHTML = `
@@ -427,7 +434,7 @@ function showEndGame() {
     `;
 }
 
-// Show the consent question page
+// Consent page
 function showConsentPage() {
     let gameContainer = document.getElementById('game-container');
     gameContainer.innerHTML = `
@@ -440,26 +447,34 @@ function showConsentPage() {
     `;
 }
 
-// Handle consent answer and show badge
+// Handle consent
 function consentAnswer(answer) {
     let gameContainer = document.getElementById('game-container');
-    if(answer) {
+    if (answer) {
         gameContainer.innerHTML = `
             <div id="badge-section">
                 <img src="badge.png" id="badge" alt="AI Detective Badge">
                 <p>Well done! You are now a certified AI Detective!</p>
+                <button onclick="restartGame()">Restart Game</button>
             </div>
         `;
     } else {
         gameContainer.innerHTML = `
             <div id="badge-section">
                 <p>Okay, you chose not to participate. You cannot receive the badge.</p>
+                <button onclick="restartGame()">Restart Game</button>
             </div>
         `;
     }
 }
 
-// Utility function to shuffle answers
+// Restart game
+function restartGame() {
+    document.querySelector('#intro-page').style.display = 'block';
+    document.getElementById('game-container').style.display = 'none';
+}
+
+// Shuffle helper
 function shuffleArray(array) {
     let arr = array.slice();
     for (let i = arr.length - 1; i > 0; i--) {
@@ -468,3 +483,5 @@ function shuffleArray(array) {
     }
     return arr;
 }
+
+
