@@ -476,7 +476,7 @@ function consentAnswer(answer) {
     } else {
         gameContainer.innerHTML = `
             <div id="badge-section">
-                <p>We hope you enjoyed the game. You can restart the game anytime.</p>
+                <p>We hope you enjoyed the game. You can restart the game anytime by reloading the page.</p>
                 <button onclick="restartGame()">Restart Game</button>
             </div>
         `;
