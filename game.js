@@ -10,7 +10,7 @@ window.addEventListener('load', () => {
         setTimeout(() => {
             headerText.style.display = 'none'; // hide completely after fade
         }, 1000); // matches the CSS transition duration
-}, 2000);
+}, 1500);
 
 });
 // =====================
@@ -348,18 +348,17 @@ let ageGroup = 'kid';
 let firstWrongAttempt = true;
 
 // Start the game
-function startGame(selectedAgeGroup) {
-    ageGroup = selectedAgeGroup;
-    currentQuestionIndex = 0;
-    firstWrongAttempt = true;
-    document.querySelector('#intro-page').style.display = 'none';
+function startGame(ageGroup) {
+    currentQuestionIndex = 0; // VERY important
+    document.getElementById('intro-page').style.display = 'none';
     document.getElementById('game-container').style.display = 'block';
 
+    // Select question set based on age
     if (ageGroup === 'kid') questions = questionsForKids;
-    else if (ageGroup === 'teen') questions = questionsForTeens;
-    else if (ageGroup === 'young-adult') questions = questionsForYoungAdults;
+    if (ageGroup === 'teen') questions = questionsForTeens;
+    if (ageGroup === 'young-adult') questions = questionsForYoungAdults;
 
-    showQuestion();
+    showQuestion(); // Show the first question
 }
 
 // Show a question
@@ -455,7 +454,8 @@ function showConsentPage() {
     gameContainer.innerHTML = `
         <div id="consent-page">
             <p>Please answer the consent question before collecting your badge:</p>
-            <p>Do you agree to participate in this investigation game?</p>
+               <p>To improve our educational resources, we collect anonymous game data. By consenting, your responses help us create and update better syllabi and activities for learners.</p>
+               <p>Do you agree to share your game data anonymously?</p>
             <button onclick="consentAnswer(true)">Yes</button>
             <button onclick="consentAnswer(false)">No</button>
         </div>
@@ -476,7 +476,7 @@ function consentAnswer(answer) {
     } else {
         gameContainer.innerHTML = `
             <div id="badge-section">
-                <p>Okay, you chose not to participate. You cannot receive the badge.</p>
+                <p>We hope you enjoyed the game. You can restart the game anytime.</p>
                 <button onclick="restartGame()">Restart Game</button>
             </div>
         `;
@@ -485,8 +485,14 @@ function consentAnswer(answer) {
 
 // Restart game
 function restartGame() {
-    document.querySelector('#intro-page').style.display = 'block';
+    currentQuestionIndex = 0; // Reset the question index
     document.getElementById('game-container').style.display = 'none';
+    document.getElementById('intro-page').style.display = 'block';
+    document.getElementById('end-game').style.display = 'none';
+    document.getElementById('consent-page').style.display = 'none';
+    document.getElementById('badge-section').style.display = 'none';
+    document.getElementById('feedback-container').innerHTML = '';
+    document.getElementById('tip-container').innerHTML = '';
 }
 
 // Shuffle helper
