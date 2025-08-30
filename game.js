@@ -4,10 +4,14 @@ window.addEventListener('load', () => {
     // Show the header text initially (it’s already visible)
     headerText.style.display = 'block';
     
-    // Hide it after 3 seconds
+    // Hide it after 2 seconds
     setTimeout(() => {
-        headerText.style.display = 'none';
-    }, 3000);
+        headerText.style.opacity = '0'; // fade out
+        setTimeout(() => {
+            headerText.style.display = 'none'; // hide completely after fade
+        }, 1000); // matches the CSS transition duration
+}, 2000);
+
 });
 // =====================
 // AI Detective Quiz JS
