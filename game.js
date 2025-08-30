@@ -1,3 +1,14 @@
+window.addEventListener('load', () => {
+    const headerText = document.getElementById('header-text');
+    
+    // Show the header text initially (it’s already visible)
+    headerText.style.display = 'block';
+    
+    // Hide it after 3 seconds
+    setTimeout(() => {
+        headerText.style.display = 'none';
+    }, 3000);
+});
 // =====================
 // AI Detective Quiz JS
 // =====================
