@@ -51,13 +51,23 @@
         <button onclick="consentAnswer(false)">No</button>
     </div>
 
-    <!-- Badge section -->
-    <div id="badge-section" style="display:none;">
-        <img src="badge.png" id="badge" alt="AI Detective Badge" style="width:150px; height:auto;">
+    <!-- Badge -->
+<div id="badge-section" style="display:none; text-align:center;">
+    <img id="badge" src="badge.png" alt="AI Detective Badge" style="width:150px; height:auto; margin-bottom: 10px;">
+    <div>
         <a id="badge-download" href="badge.png" download="AI_Detective_Badge.png">
             <button>Download Your Badge</button>
         </a>
     </div>
+
+    <!-- Social share buttons -->
+    <div id="share-buttons" style="margin-top:15px;">
+        <p>Share your badge with your friends!</p>
+        <button onclick="shareBadge('facebook')">Facebook</button>
+        <button onclick="shareBadge('whatsapp')">WhatsApp</button>
+        <button onclick="copyBadgeLink()">Copy Link</button>
+    </div>
+</div>
 
     <script src="game.js"></script>
     <script>
