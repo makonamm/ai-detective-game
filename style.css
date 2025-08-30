@@ -10,11 +10,8 @@ body {
 
 /* Header */
 #header {
-    background-color: transparent;
     margin-bottom: 30px;
-    font-size: 20px;
-    font-style: underline;
-    
+    font-size: 20px;    
 }
 
 #header-text {
