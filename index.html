@@ -57,21 +57,10 @@
         <a id="badge-download" href="badge.png" download="AI_Detective_Badge.png">
             <button>Download Your Badge</button>
         </a>
-        <div style="margin-top:20px;">
-            <button onclick="restartGame()">Restart Game</button>
-        </div>
     </div>
 
     <script src="game.js"></script>
     <script>
-        // Optional: Restart the game after badge
-        function restartGame() {
-            currentQuestionIndex = 0;
-            document.getElementById('intro-page').style.display = 'block';
-            document.getElementById('game-container').style.display = 'none';
-            document.getElementById('consent-page').style.display = 'none';
-            document.getElementById('badge-section').style.display = 'none';
-        }
     </script>
 </body>
 </html>
