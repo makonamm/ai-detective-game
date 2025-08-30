@@ -2,7 +2,7 @@
 body {
     font-family: 'Montserrat'; /* Only Montserrat font */
     background-color: #deba76; /* Background Color */
-    color: #8b6733; /* General Text Color */
+    color: #7e5329; /* General Text Color */
     text-align: center;
     margin: 0;
     padding: 0;
@@ -10,8 +10,8 @@ body {
 
 /* Header */
 #header {
-    margin-bottom: 30px;
-    font-size: 20px;    
+    margin-bottom: 20px;
+    font-size: 14px;    
 }
 
 #header-text {
@@ -20,8 +20,8 @@ body {
 }
 
 .logo {
-    width: 200px;
-    height: auto;
+    width: 150px;
+    height: 150px;
 }
 
 /* Heading */
