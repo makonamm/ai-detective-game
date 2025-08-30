@@ -8,6 +8,17 @@ body {
     padding: 0;
 }
 
+html, body {
+    height: 100%;          /* make sure the body fills the window */
+    margin: 0;
+    padding: 0;
+    background-color: #efe1b7; /* your desired background */
+}
+
+#game-container, #intro-page, #end-game, #consent-page, #badge-section {
+    background-color: transparent; /* so they don’t have white boxes */
+}
+
 /* Header */
 #header {
     margin-bottom: 50px;
