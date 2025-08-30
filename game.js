@@ -437,62 +437,48 @@ function nextQuestion() {
     showQuestion();
 }
 
-// End-game
+// Show end-game message after last question
 function showEndGame() {
     let gameContainer = document.getElementById('game-container');
     gameContainer.innerHTML = `
         <div id="end-game">
             <p>Congratulations, Detective! You’ve completed your investigation. The truth is now clear.</p>
-            <p><button onclick="showConsentPage()">Proceed to Consent Question</button></p>
+            <button onclick="showConsentPage()">Proceed to Consent Question</button>
         </div>
     `;
 }
 
-// Consent page
+// Show the consent question page
 function showConsentPage() {
     let gameContainer = document.getElementById('game-container');
     gameContainer.innerHTML = `
         <div id="consent-page">
-            <p>Please answer the consent question before collecting your badge:</p>
-               <p>To improve our educational resources, we collect anonymous game data. By consenting, your responses help us create and update better syllabi and activities for learners.</p>
-               <p>Do you agree to share your game data anonymously?</p>
-            <button onclick="consentAnswer(true)">Yes</button>
-            <button onclick="consentAnswer(false)">No</button>
+            <p>To improve our educational resources, we collect anonymous game data. By consenting, your data helps us create and update better syllabi for educators.</p>
+            <button onclick="consentAnswer(true)">I consent</button>
+            <button onclick="consentAnswer(false)">I do not consent</button>
         </div>
     `;
 }
 
-// Handle consent
+// Handle consent answer and show badge
 function consentAnswer(answer) {
     let gameContainer = document.getElementById('game-container');
-    if (answer) {
+    if(answer) {
         gameContainer.innerHTML = `
             <div id="badge-section">
-                <img src="badge.png" id="badge" alt="AI Detective Badge">
-                <p>Well done! You are now a certified AI Detective!</p>
-                <button onclick="restartGame()">Restart Game</button>
+                <img id="badge" src="badge.png" alt="AI Detective Badge" style="width:150px; height:auto;">
+                <a id="badge-download" href="badge.png" download="AI_Detective_Badge.png">
+                    <button>Download Your Badge</button>
+                </a>
             </div>
         `;
     } else {
         gameContainer.innerHTML = `
             <div id="badge-section">
-                <p>We hope you enjoyed the game. You can restart the game anytime by reloading the page.</p>
-                <button onclick="restartGame()">Restart Game</button>
+                <p>You chose not to consent. You cannot receive the badge.</p>
             </div>
         `;
     }
-}
-
-// Restart game
-function restartGame() {
-    currentQuestionIndex = 0; // Reset the question index
-    document.getElementById('game-container').style.display = 'none';
-    document.getElementById('intro-page').style.display = 'block';
-    document.getElementById('end-game').style.display = 'none';
-    document.getElementById('consent-page').style.display = 'none';
-    document.getElementById('badge-section').style.display = 'none';
-    document.getElementById('feedback-container').innerHTML = '';
-    document.getElementById('tip-container').innerHTML = '';
 }
 
 // Shuffle helper
@@ -504,5 +490,3 @@ function shuffleArray(array) {
     }
     return arr;
 }
-
-
