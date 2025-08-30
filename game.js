@@ -10,7 +10,7 @@ window.addEventListener('load', () => {
         setTimeout(() => {
             headerText.style.display = 'none'; // hide completely after fade
         }, 1000); // matches the CSS transition duration
-}, 1500);
+}, 2000);
 
 });
 // =====================
