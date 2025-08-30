@@ -10,12 +10,16 @@ body {
 
 /* Header */
 #header {
-    background-color: #ffffff;
+    background-color: transparent;
     margin-bottom: 30px;
+    font-size: 20px;
+    font-style: underline;
+    
 }
 
 #header-text {
     transition: opacity 1s ease;
+    color: #20264f;
 }
 
 .logo {
