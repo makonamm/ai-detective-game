@@ -482,6 +482,31 @@ function consentAnswer(answer) {
     }
 }
 
+function shareBadge(platform) {
+    const badgeUrl = encodeURIComponent(window.location.origin + '/badge.png'); // link to badge image
+    let shareUrl = '';
+
+    switch(platform) {
+        case 'facebook':
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${badgeUrl}`;
+            break;
+        case 'whatsapp':
+            shareUrl = `https://api.whatsapp.com/send?text=I earned my AI Detective Badge! Check it out: ${badgeUrl}`;
+            break;
+    }
+
+    window.open(shareUrl, '_blank');
+}
+
+function copyBadgeLink() {
+    const badgeUrl = window.location.origin + '/badge.png';
+    navigator.clipboard.writeText(badgeUrl).then(() => {
+        alert('Badge link copied to clipboard!');
+    }).catch(() => {
+        alert('Failed to copy link.');
+    });
+}
+
 // Shuffle helper
 function shuffleArray(array) {
     let arr = array.slice();
