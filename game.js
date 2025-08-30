@@ -443,6 +443,7 @@ function showEndGame() {
     gameContainer.innerHTML = `
         <div id="end-game">
             <p>Congratulations, Detective! You’ve completed your investigation. The truth is now clear.</p>
+            <p>Consent to receive your AI Detective Badge</p>
             <button onclick="showConsentPage()">Proceed to Consent Question</button>
         </div>
     `;
@@ -475,7 +476,7 @@ function consentAnswer(answer) {
     } else {
         gameContainer.innerHTML = `
             <div id="badge-section">
-                <p>You chose not to consent. You cannot receive the badge.</p>
+                <p>We hope you enjoyed the game. You can restart the game by reloading the page.</p>
             </div>
         `;
     }
