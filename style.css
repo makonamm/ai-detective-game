@@ -11,12 +11,11 @@ body {
 /* Header */
 #header {
     background-color: #ffffff;
-    padding: 20px;
     margin-bottom: 30px;
 }
 
 .logo {
-    width: 150px;
+    width: 200px;
     height: auto;
 }
 
@@ -32,13 +31,15 @@ button {
     background-color: #AEB5FF;
     border: 2px solid #5032b9;
     border-radius: 12px;  /* Makes the corners rounded */
-    padding: 12px 25px;
-    margin: 15px;
-    font-size: 18px;
+    padding: 12px 12px;
+    margin: 10px;
+    font-size: 16px;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
     color: #20264f; /* Text color for buttons */
     font-weight: normal; /* Normal weight for button text */
+    white-space: normal;  /* allows text to break into multiple lines if needed */
+    text-align: center;
 }
 
 button:hover {
