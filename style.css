@@ -1,8 +1,8 @@
 /* Global Font Setup */
 body {
     font-family: 'Montserrat'; /* Only Montserrat font */
-    background-color: #ffffff; /* Background Color */
-    color: #20264f; /* General Text Color */
+    background-color: #deba76; /* Background Color */
+    color: #8b6733; /* General Text Color */
     text-align: center;
     margin: 0;
     padding: 0;
@@ -27,13 +27,13 @@ body {
 /* Heading */
 h1 {
     font-size: 26px;
-    color: #20264f;
+    color: #8b6733;
     font-weight: bold; /* Bold for headings */
 }
 
 /* Button Styling */
 button {
-    background-color: #AEB5FF;
+    background-color: #d4ae64;
     border: 2px solid #5032b9;
     border-radius: 12px;  /* Makes the corners rounded */
     padding: 12px 12px;
@@ -41,7 +41,7 @@ button {
     font-size: 16px;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
-    color: #20264f; /* Text color for buttons */
+    color: #8b6733; /* Text color for buttons */
     font-weight: normal; /* Normal weight for button text */
     white-space: normal;  /* allows text to break into multiple lines if needed */
     text-align: center;
@@ -64,7 +64,7 @@ button:active {
 /* Question Text */
 #question-container {
     font-size: 22px;
-    color: #202650; /* Text color for questions */
+    color: #7e5329; /* Text color for questions */
     margin-bottom: 20px;
     border-radius: 12px;  /* Round corners for answer options */
     font-weight: bold; /* Bold for questions */
